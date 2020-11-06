@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formula cuadrática</title>
+    <style>
+        h1,
+        p,
+        h3,
+        input {
+            text-align: center;
+        }
+        
+        form {
+            text-align: center;
+        }
+    </style>
+    <script>
+        function calcular(boton) {
+            let form = boton.form.elements;
+            let a = parseFloat(form["a"].value);
+            let b = parseFloat(form["b"].value);
+            let c = parseFloat(form["c"].value);
+
+            if ((b ** 2) == (4 * a * c)) {
+                console.log("Solo hay una solución para x");
+                let sol = ((-1 * -b) + (Math.sqrt((Math.pow(b, 2) - (4 * a * c))))) / (2 * a);
+                document.getElementById("resultado").innerHTML = `Sol: ${sol}`;
+            }
+            if ((b ** 2) < (4 * a * c)) {
+                console.log("la raiz es imaginaria");
+                document.getElementById("resultado").innerHTML = "Error: La ecuación ingresada tiene como resultado un numero imaginario ";
+            }
+            if ((b ** 2) > (4 * a * c)) {
+                console.log("x Tiene 2 soluciones");
+
+                let sol1 = ((-1 * -b) + (Math.sqrt((Math.pow(b, 2) - (4 * a * c))))) / (2 * a);
+
+                let sol2 = ((-1 * -b) - (Math.sqrt((Math.pow(b, 2) - (4 * a * c))))) / (2 * a);
+
+                document.getElementById("resultado").innerHTML = `Sol 1: ${sol1} \n Sol 2: ${sol2}`;
+            }
+
+            document.getElementById("resultado");
+        }
+
+        function borrar(boton) {
+
+            let form = boton.form.elements;
+            form["a"].value = "";
+            form["b"].value = "";
+            form["c"].value = "";
+
+            document.getElementById("resultado").innerHTML = "";
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Formula general Interactiva</h1>
+    <p>Ingresa los datos correspondinetes a A, B y C para calcular tu ecuación</p>
+
+    <form>
+        <label for="a"> Ingresa el valor de A </label>
+        <input type="number" name="a">
+        <br>
+        <label for="b"> Ingresa el valor de B </label>
+        <input type="number" name="b">
+        <br>
+        <label for="c"> Ingresa el valor de C </label>
+        <input type="number" name="c">
+        <br><br>
+        <input type="button" value="Calcular" onclick="calcular(this)">
+        <input type="button" value="Borrar" onclick="borrar(this)">
+    </form>
+
+    <h3 id="resultado"></h3>
+</body>
+
+</html>
